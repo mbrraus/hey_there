@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seni Sevmemin 50 Nedeni</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff1f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .active {
+      display: flex;
+    }
+    .btn {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #f08080;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background-color: #e06666;
+    }
+    .btn.secondary {
+      background-color: #a0d2eb;
+    }
+    .btn.secondary:hover {
+      background-color: #88c2e2;
+    }
+    .card-container {
+      perspective: 1000px;
+    }
+    .card {
+      width: 300px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+      text-align: center;
+    }
+    .card-front {
+      background-color: #fef6e4;
+      color: #2e2e2e;
+      flex-direction: column;
+    }
+    .card-back {
+      background-color: #bae1ff;
+      color: #2e2e2e;
+      transform: rotateY(180deg);
+    }
+    .flip-icon {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      opacity: 0.6;
+    }
+      .fade-out {
+      animation: fadeOut 0.3s ease-in-out;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.95); }
+    }
+</style>
+</head>
+<body>
+<!-- Giriş Ekranı -->
+  <div class="screen active" id="giris">
+    <h1>iyi ki doğdun abiciiiim, doğum gününe hoş geldin! 🎉</h1>
+    <button class="btn" onclick="goTo('soruHazirlik')">devam </button>
+  </div>
+
+  <!-- Soruya Geçiş Bilgilendirmesi -->
+  <div class="screen" id="soruHazirlik">
+    <h1>öncelikle ufak bir sorum var...</h1>
+    <button class="btn" onclick="goTo('soru')">devam </button>
+  </div>
+
+  <!-- Soru Ekranı -->
+  <div class="screen" id="soru">
+    <h1>beni ne kadar seviyosun?</h1>
+    <div class="buttons">
+      <button class="btn" onclick="goTo('cevap')">çooook</button>
+      <button class="btn secondary moving-btn" id="azBtn">az 🙄</button>
+      <button class="btn secondary moving-btn" id="oooffBtn">öööooff bu ne biçim soru Şeyma 🙄</button>
+      <button class="btn secondary moving-btn" id="seviyorumBtn">seviyorum işte 😒</button>
+    </div>
+  </div>
+
+  <!-- Cevap Ekranı -->
+  <div class="screen" id="cevap">
+    <h1>biliyodum! ben de seni çok seviyorum 💙</h1>
+    <p id="final-message" style="margin-top: 3rem; font-size: 1.1rem; max-width: 500px; color: #2e2e2e;">
+      şimdi seni sevmemin 15 nedenini söyleyeceğim, hazırsan başlayalım...
+    </p>
+    <button class="btn" onclick="goTo('nedenler')">let's go</button>
+  </div>
+
+  <!-- Nedenler Ekranı: Kartlı -->
+  <div class="screen" id="nedenler" style="gap: 2.5rem;">
+    <h1>SENİ SEVMEMİN 15 NEDENİ</h1>
+    <div class="card-container" id="cardContainer"></div>
+    <button class="btn" onclick="nextCard()">gönder gelsin 👉</button>
+  </div>
+
+  <!-- Final Mesajı -->
+  <div class="screen" id="final">
+    <h1>🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉</h1>
+    <p style="max-width: 600px; font-size: 1.2rem; margin-top: 1.5rem; line-height: 1.6; color: #2e2e2e;">
+      biliyorum bu sebepler say say bitmez, hem biraz da sonraki doğum günlerine materyal kalsın 😂<br><br>
+      seninle paylaştığım her an, seninle paylaştığım için çok değerli. güzel olanlar daha güzel, zor olanlar daha hafif oluyor sen yanımda olunca. <br><br>
+      kendimi bildim bileli benim için hep ilham kaynağı oldun. sana sahip olduğum için hep çok güvende ve iyi hissettim. 😊 <br><br>
+      yeni yaşında yürüyeceğin güzel yolların olsun. iyi ki doğdun, iyi ki benim abimsin, iyi ki senin kardeşinim, iyi ki varsııııııınnnn!!!! ❤️❤️❤️❤️<br><br>
+      seni her nedenin kat kat fazlasıyla seviyorummm<br><br>
+      🥳 Doğum günün kutlu olsun!!!!!!!!!
+    </p>
+  </div>
+
+  <script>
+    let currentCardIndex = 0;
+    function goTo(id) {
+      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    const movingButtons = [
+      document.getElementById("azBtn"),
+      document.getElementById("seviyorumBtn")
+    ];
+
+    movingButtons.forEach(btn => {
+      btn.addEventListener("mouseover", () => {
+        const x = Math.floor(Math.random() * 500) - 250;
+        const y = Math.floor(Math.random() * 500) - 250;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+
+    const oooffBtn = document.getElementById("oooffBtn");
+    oooffBtn.addEventListener("mousemove", (e) => {
+      const rect = oooffBtn.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      const btnX = rect.left + rect.width / 2;
+      const btnY = rect.top + rect.height / 2;
+      const distance = Math.hypot(mouseX - btnX, mouseY - btnY);
+
+      if (distance < 100) {
+        const offsetX = Math.floor(Math.random() * 300) - 150;
+        const offsetY = Math.floor(Math.random() * 300) - 150;
+        oooffBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      } else {
+        oooffBtn.style.transform = "translate(0, 0)";
+      }
+    });
+
+    const cards = [
+      {
+        front: "sen olmanı seviyorum.",
+        back: "öncelikle seni sevmek için nedenlere ihtiyacım yok zaten ama sen bana hep yenilerini veriyorsun."
+      },
+      {
+        front: "seninle yaşadığım anları seviyorum",
+        back: "en sıradan anılarımız bile benim için çok değerli ve bir şekilde aklımda yer ediyor, yeni nedenlere dönüşüyor. yaz tatillerinin sonunda okula döneceğin zaman ikimizin yatakta uzanırken başımı okşadığın ve benimle konuştuğun anların kokusunu hala alabiliyorum mesela."
+      },
+      {
+        front: "seninle yaşayacağım anları seviyorum",
+        back: "beraber içilecek kahvelerimizi, yapacağımız yürüyüşleri, yiyeceğimiz sushileri, edeceğimiz her sohbeti şimdiden çok seviyorum."
+      },
+      {
+        front: "yemek sevgini seviyorum",
+        back: "iştahını, youtube’dan random yemek videoları izlemeni, mutfakta geçirdiğin vakitleri ve benden becerikli olmanı seviyorum!"
+      },
+      {
+        front: "sakinliğini seviyorum",
+        back: "en hüzünlü anlarım bile seninleyken ya da seninle konuştuğumda yumuşuyor, hafifliyor gibi. abartılı ya da yapmacık olmayan, içten tepkilerini seviyorum."
+      },
+      {
+        front: "asabi halini seviyorum",
+        back: "bazen de olaylara yükselmeni, anlamlandırmaya çalışırken hafiften sinirlenmeni seviyorum."
+      },
+      {
+        front: "güvende hissettirmeni seviyorum",
+        back: "kilometrelerce uzaktayken, düşük veya kötü hissettiğim bir anda aklıma sen geldiğinde rahatlamamı seviyorum. sadece varlığının bile verdiği güven bambaşka."
+      },
+      {
+        front: "olaylara yaptığın random yorumları seviyorum",
+        back: "çok konuşmayıp hiç beklenmedik bir anda gelişine kurduğun cümlelere, esprilerine bayılıyorum. her seferinde yüzümü güldürüyor."
+      },
+      {
+        front: "zeki olmanı seviyorum",
+        back: "kafan çalışıyor işte belli, bunu da baya seviyorum! 😂"
+      },
+      {
+        front: "beni sevmeni seviyorum",
+        back: "gerçekten her fırsatta abim, kardeşim olduğunu hissettirmeni ve senin tarafından çok sevildiğimi bilmeyi, bunu hissetmeyi çok seviyorum!"
+      },
+      {
+        front: "ilgili olmanı seviyorum",
+        back: "sevgi ilgi gerektirir ve sen bunu çok güzel yapıyorsun. yediğim yemeklerle, gittiğim yerlerle bile ilgili olmanı, benimle alakalı hiçbir şeyi geçiştirmemeni, üzerine konuşabilmemizi çok seviyorum."
+      },
+      {
+        front: "muhabbetini seviyorum",
+        back: "seninle en sıradan şeyleri büyük bir zevkle saatlerce konuşabilirim, iyi sarıyor. baya seviyorum 😂"
+      },
+      {
+        front: "çalışkanlığını seviyorum",
+        back: "özellikle bir şeyden keyif aldığında ona harcadığın zaman, verdiğin emek bana bile geçiyor. çabasızca gösterdiğin çabaları çok seviyorum!"
+      },
+      {
+        front: "kardeş olmamızı seviyorum",
+        back: "bana takılmanı, beni zorbalamanı, beni gaza getirmeni, aynı anne babanın evladı olmamızı, benzer ve farklı yaşantılarımızla, bir şekilde birlikte bir yol yürüyor olmamızı seviyorum."
+      },
+      {
+        front: "he bi de,",
+        back: "inci’nin dayısı olmanı seviyorum 😂 onunla ilişkini, yaşadığınız ufak tefek, tatlı anlara şahit olmayı çok seviyorum. inci çok şanslı. ben de öyleyim 😋"
+      }
+    ];
+
+    function showCard(index) {
+  const container = document.getElementById("cardContainer");
+  container.classList.add("fade-out");
+
+  setTimeout(() => {
+    container.classList.remove("fade-out");
+    container.innerHTML = "";
+
+    if (index >= cards.length) {
+      goTo('final');
+      return;
+    }
+
+    const cardData = cards[index];
+    const card = document.createElement("div");
+    card.className = "card";
+    card.onclick = () => card.classList.toggle("flipped");
+
+    const pastelColors = [
+      ["#fef6e4", "#d8e2dc"],
+      ["#e0fbfc", "#cdb4db"],
+      ["#fde2e4", "#bee1e6"],
+      ["#e2ece9", "#ffcbf2"],
+      ["#fff1e6", "#b5ead7"]
+    ];
+    const [frontColor, backColor] = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+
+    card.innerHTML = `
+      <div class="card-face card-front" style="background-color: ${frontColor}">
+        ${cardData.front}<div class="flip-icon">🔁</div>
+      </div>
+      <div class="card-face card-back" style="background-color: ${backColor}">
+        ${cardData.back}
+      </div>
+    `;
+
+    container.appendChild(card);
+  }, 200);
+}
+
+
+    function nextCard() {
+      currentCardIndex++;
+      showCard(currentCardIndex);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      showCard(currentCardIndex);
+    });
+  </script>
